@@ -1039,6 +1039,7 @@ GameObject:
   - component: {fileID: 88923107}
   - component: {fileID: 88923106}
   - component: {fileID: 88923108}
+  - component: {fileID: 88923109}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1172,8 +1173,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.05824828, y: -0.12275356}
-  m_Size: {x: 1.3135896, y: 1.5757388}
+  m_Offset: {x: -0.05824828, y: -0.14948219}
+  m_Size: {x: 1.3135896, y: 1.629196}
   m_Direction: 0
 --- !u!50 &88923107
 Rigidbody2D:
@@ -1191,7 +1192,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 7da06cd3d5be55b4abc42ac2fc3bb149, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1232,6 +1233,19 @@ MonoBehaviour:
   m_DefaultActionMap: 
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &88923109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 88923102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7cd78c9d10abc14c8267e38a160db03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 20
 --- !u!1 &135132844
 GameObject:
   m_ObjectHideFlags: 0
