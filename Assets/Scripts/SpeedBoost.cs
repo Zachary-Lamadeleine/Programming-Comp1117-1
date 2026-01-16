@@ -7,7 +7,7 @@ public class SpeedBoost : MonoBehaviour
 {
         public float boostSpeed;
         private float savedSpeed;
-        public PlayerController controller;
+        [SerializeField] public PlayerStats stats;
         public float boostDuration;
         public Vector2 targetPosition;
 
@@ -16,20 +16,20 @@ public class SpeedBoost : MonoBehaviour
             if (collision.gameObject.tag == "Player")
             {
                 
-                savedSpeed = controller.speed;
-                controller.speed = boostSpeed;
+                savedSpeed = stats.MoveSpeed;
+                stats.MoveSpeed = boostSpeed;
                 StartCoroutine(BoostTimer());
                 Debug.Log("speed increase");
                 transform.position = new Vector2(99999999f, 999999999f);
 
-        }
+            }
     }
 
 
     IEnumerator BoostTimer()
     {
         yield return new WaitForSeconds(boostDuration);
-        controller.speed = savedSpeed;
+        stats.MoveSpeed = savedSpeed;
         Debug.Log("speed reset");
         Destroy(gameObject);
     }

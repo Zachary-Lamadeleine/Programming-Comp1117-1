@@ -1,22 +1,26 @@
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    [Range(0.0f, 20.0f)]
-    public float speed;
-    [SerializeField] private Rigidbody2D playerRigidBody;
+    // Initial Player Stats
+    [Header("Initial Player Stats")]
+    [SerializeField] private float initialSpeed = 5.0f;
+    [SerializeField] private int initialHealth = 100;
 
-    //components
-    Rigidbody2D rBody;
+    // Private Variables
+    private PlayerStats stats;
+    private Vector2 moveInput;
 
-    //private Variables
-    Vector2 moveInput;
-    Vector2 jumpInput;
+    // Components
+    private Rigidbody2D rBody;
 
-    private void Awake()
+    void Awake()
     {
         rBody = GetComponent<Rigidbody2D>();
+
+        stats = new PlayerStats(initialSpeed, initialHealth);
     }
 
     void OnMove(InputValue value)
@@ -24,27 +28,22 @@ public class PlayerController : MonoBehaviour
         moveInput = value.Get<Vector2>();
     }
 
-    void OnJump(InputValue value)
-    {
-        jumpInput = value.Get<Vector2>();
-    }
-
     void FixedUpdate()
     {
         ApplyMovement();
     }
 
-    void ApplyMovement()
+    private void ApplyMovement()
     {
-        float targetVelocityX = moveInput.x * speed;
-        rBody.linearVelocity = new Vector2(targetVelocityX, rBody.linearVelocity.y);
+        float targetVelocityX = moveInput.x * stats.MoveSpeed;
 
-        if (Input.GetButtonDown("Jump"))
-        {
-            float targetVelocityY = jumpInput.y * speed;
-            rBody.linearVelocity = new Vector2(targetVelocityY,rBody.linearVelocityX);
-        }
+        rBody.linearVelocity = new Vector2(targetVelocityX, rBody.linearVelocity.y);
     }
 
+    public void TakeDamage(int damageAmount)
+    {
+        stats.CurrentHealth -= damageAmount;
 
+        Debug.Log("Player took damage");
+    }
 }
