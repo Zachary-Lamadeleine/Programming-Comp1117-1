@@ -6,6 +6,7 @@ public class TestEnemy : MonoBehaviour
     // public const string PLAYER_TAG = "Player";
 
     [SerializeField] private PlayerController thePlayerController;
+    [SerializeField] private int damagedToDeal;
 
     /*
     private void Awake()
@@ -31,7 +32,15 @@ public class TestEnemy : MonoBehaviour
     {
         if (value.isPressed)
         {
-            thePlayerController.TakeDamage(10);
+            if (thePlayerController != null)
+            {
+                thePlayerController.TakeDamage(damagedToDeal);
+                Debug.Log("Attacking the player");
+            }
+            else
+            {
+                Debug.LogWarning("TESTENEMY.CS : PlayerController is null");
+            }
         }
     }
 }
