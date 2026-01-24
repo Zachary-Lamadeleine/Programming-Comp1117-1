@@ -26,7 +26,7 @@ public class Player : Character
     {
         // Perform my ground check.
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-        Debug.Log(isGrounded);
+       
     }
 
     private void FixedUpdate()  // Movement goes here (Move and jump)
@@ -63,6 +63,6 @@ public class Player : Character
         rBody.linearVelocity = new Vector2(rBody.linearVelocity.x, 0);
 
         rBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-        Debug.Log("Random");
+        
     }
 }
