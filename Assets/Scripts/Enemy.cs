@@ -1,27 +1,39 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
 
 public class Enemy : Character
 {
     [Header("Enemy Settings")]
-    [SerializeField] private float patrolDistance = 5.0f;
-    private Rigidbody2D rBody;
+    [SerializeField] public float patrolDistance = 5.0f;
+
+    private Vector2 startPos;   // Starting position
+    private int direction = -1; // By default, my eagle points left
+
     protected override void Awake()
     {
         base.Awake();
-        rBody = GetComponent<Rigidbody2D>();
-        Debug.Log("Awake in Enemy.cs");
+
+        startPos = transform.position;
     }
 
-    public void OnTriggerEnter2D(Collider2D collision)
+    private void Update()
     {
-        //If player touches object, destroy what  is taged to it.
-        if (collision.gameObject.tag == "Player")
+        // Calculate the boundaries of my movement
+        float leftBoundary = startPos.x - patrolDistance;
+        float rightBoundary = startPos.x + patrolDistance;
+
+        transform.Translate(Vector2.right * direction * MoveSpeed * Time.deltaTime);
+
+        // Flip this object when it hits a boundary
+        if (transform.position.x >= rightBoundary)
         {
-            //Bullet Audio
-            
-            Destroy(gameObject);
+            direction = -1; // Go left
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+        else if (transform.position.x <= leftBoundary)
+        {
+            direction = 1;  // Go right
+            transform.localScale = new Vector3(-1, 1, 1);
         }
     }
 }

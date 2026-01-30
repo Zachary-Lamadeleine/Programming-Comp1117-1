@@ -12,7 +12,7 @@ public class Player : Character
     private Rigidbody2D rBody;
     private bool isGrounded;
     private PlayerInputHandler input;
-
+    
     protected override void Awake()
     {
         base.Awake();
@@ -26,7 +26,22 @@ public class Player : Character
     {
         // Perform my ground check.
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-       
+
+        //////////////////////set animation values/////////////////////////////
+
+        //Run and walk
+        anim.SetFloat("XVelocity", Mathf.Abs(rBody.linearVelocity.x));
+
+        //Jump and fall
+        anim.SetBool("isGrounded", isGrounded);
+        anim.SetFloat("YVelocity", rBody.linearVelocity.y);
+
+        //Handle Sprite Flipping
+        if(input.MoveInput.x != 0)
+        {
+            transform.localScale = new Vector3(Mathf.Sign(input.MoveInput.x), 1, 1);  // (x, y, z) --- Scale
+        }
+
     }
 
     private void FixedUpdate()  // Movement goes here (Move and jump)
