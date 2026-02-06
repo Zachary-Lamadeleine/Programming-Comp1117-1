@@ -5,10 +5,9 @@ public class Enemy : Character
 {
     [Header("Enemy Settings")]
     [SerializeField] public float patrolDistance = 5.0f;
-    private SpriteRenderer spriteColor;
-    
-    public Vector2 startPos;   // Starting position
-    public int direction = -1; // By default, my eagle points left
+
+    private Vector2 startPos;   // Starting position
+    private int direction = -1; // By default, my eagle points left
 
     protected override void Awake()
     {
@@ -38,10 +37,18 @@ public class Enemy : Character
         }
     }
 
-    public void ChangeColor()
+    public override void Die()
     {
-        
-        spriteColor = GetComponent<SpriteRenderer>();
-        spriteColor.color = new Color(1f, 0.843f, 0f, 1f);
+        Debug.Log("Enemy is dead");
+
+        // ENEMY DEATH LOGIC!
+        // ------------------
+        // Award points / loot to the player
+        // Enemy death animation
+        // Destroy the enemy
+
+        // Invoke(methodName, time)
+        // InvokeRepeating(methodName, time, repeatedTime)
+        // Destroy(gameObject, time)
     }
 }

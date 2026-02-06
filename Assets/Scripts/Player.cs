@@ -12,7 +12,8 @@ public class Player : Character
     private Rigidbody2D rBody;
     private bool isGrounded;
     private PlayerInputHandler input;
-    
+    private float currentSpeedModifier = 1f;
+
     protected override void Awake()
     {
         base.Awake();
@@ -27,25 +28,27 @@ public class Player : Character
         // Perform my ground check.
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
-        //////////////////////set animation values/////////////////////////////
+        // Set movement animation values
+        anim.SetFloat("xVelocity", Mathf.Abs(rBody.linearVelocity.x));
 
-        //Run and walk
-        anim.SetFloat("XVelocity", Mathf.Abs(rBody.linearVelocity.x));
-
-        //Jump and fall
+        // Set jumping animation values
         anim.SetBool("isGrounded", isGrounded);
-        anim.SetFloat("YVelocity", rBody.linearVelocity.y);
+        anim.SetFloat("yVelocity", rBody.linearVelocity.y);
 
-        //Handle Sprite Flipping
-        if(input.MoveInput.x != 0)
+        // Handle sprite flipping
+        if (input.MoveInput.x != 0 && !IsDead)
         {
-            transform.localScale = new Vector3(Mathf.Sign(input.MoveInput.x), 1, 1);  // (x, y, z) --- Scale
+            transform.localScale = new Vector3(Mathf.Sign(input.MoveInput.x), 1, 1);    // (x, y, z) -- Scale
         }
-
     }
 
     private void FixedUpdate()  // Movement goes here (Move and jump)
     {
+        if (IsDead)
+        {
+            return;
+        }
+
         // Handle Movement
         HandleMovement();
         // Handle Jumping
@@ -57,15 +60,17 @@ public class Player : Character
     {
         // We get the MoveInput from InputHandler
         // We get MoveSpeed from our Parent Class (Character)
-        float horizontalVelocity = input.MoveInput.x * MoveSpeed;
+        float horizontalVelocity = input.MoveInput.x * MoveSpeed * currentSpeedModifier;
 
         rBody.linearVelocity = new Vector2(horizontalVelocity, rBody.linearVelocity.y);
+
+        currentSpeedModifier = 1f;
     }
 
     private void HandleJump()
     {
         // Only jump if I'm on the ground and input.jumpTriggered is set to true
-        if(input.JumpTriggered && isGrounded)
+        if (input.JumpTriggered && isGrounded)
         {
             // Apply the Jump Force
             ApplyJumpForce();
@@ -78,6 +83,23 @@ public class Player : Character
         rBody.linearVelocity = new Vector2(rBody.linearVelocity.x, 0);
 
         rBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-        
+    }
+
+    public void ApplySpeedModifier(float speedModifier)
+    {
+        currentSpeedModifier = speedModifier;
+    }
+
+    public override void Die()
+    {
+        isDead = true;
+        Debug.Log("Player has Died");
+
+        // PLAYER DEATH LOGIC!
+        // -------------------
+        // Add player specific death logic
+        // Set death animation
+        // Trigger death UI
+        // Initiate level reset logic
     }
 }

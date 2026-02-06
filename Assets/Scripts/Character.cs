@@ -1,15 +1,15 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Animator))]
-public class Character : MonoBehaviour
+public abstract class Character : MonoBehaviour
 {
     // Private variables
     [Header("Character Stats")]
     [SerializeField] private float moveSpeed = 5.0f;
     [SerializeField] private int maxHealth = 100;
-
     [SerializeField] private int currentHealth;
-    private bool isDead = false;
+
+    protected bool isDead = false;
     protected Animator anim;
 
     // Public properties
@@ -34,13 +34,15 @@ public class Character : MonoBehaviour
     {
         Debug.Log("Character Awake function");
         currentHealth = maxHealth;
+        /////////////////////
         anim = GetComponent<Animator>();
+        /////////////////////
     }
 
     public void TakeDamage(int amount)
     {
         // Level of Protection
-        if(IsDead)
+        if (IsDead)
         {
             return;
         }
@@ -50,15 +52,11 @@ public class Character : MonoBehaviour
         Debug.Log($"{gameObject.name} HP is now: {CurrentHealth}");
 
         // Check if dead
-        if(CurrentHealth <= 0)
+        if (CurrentHealth <= 0)
         {
             Die();
         }
     }
 
-    protected void Die()
-    {
-        isDead = true;
-        Debug.Log($"{gameObject.name} has died.");
-    }
+    public abstract void Die();
 }
