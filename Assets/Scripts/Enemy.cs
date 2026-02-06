@@ -5,9 +5,10 @@ public class Enemy : Character
 {
     [Header("Enemy Settings")]
     [SerializeField] public float patrolDistance = 5.0f;
-
-    private Vector2 startPos;   // Starting position
-    private int direction = -1; // By default, my eagle points left
+    private SpriteRenderer spriteColor;
+    
+    public Vector2 startPos;   // Starting position
+    public int direction = -1; // By default, my eagle points left
 
     protected override void Awake()
     {
@@ -35,5 +36,12 @@ public class Enemy : Character
             direction = 1;  // Go right
             transform.localScale = new Vector3(-1, 1, 1);
         }
+    }
+
+    public void ChangeColor()
+    {
+        
+        spriteColor = GetComponent<SpriteRenderer>();
+        spriteColor.color = new Color(1f, 0.843f, 0f, 1f);
     }
 }
