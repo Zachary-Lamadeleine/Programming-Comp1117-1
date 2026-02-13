@@ -13,7 +13,7 @@ public class Player : Character
     private bool isGrounded;
     private PlayerInputHandler input;
     private float currentSpeedModifier = 1f;
-
+    private float yScale = 1f;
     protected override void Awake()
     {
         base.Awake();
@@ -38,7 +38,7 @@ public class Player : Character
         // Handle sprite flipping
         if (input.MoveInput.x != 0 && !IsDead)
         {
-            transform.localScale = new Vector3(Mathf.Sign(input.MoveInput.x), 1, 1);    // (x, y, z) -- Scale
+            transform.localScale = new Vector3(Mathf.Sign(input.MoveInput.x), yScale, 1);    // (x, y, z) -- Scale
         }
     }
 
@@ -102,4 +102,16 @@ public class Player : Character
         // Trigger death UI
         // Initiate level reset logic
     }
+
+    public void ApplyGravityFlip(float gravFlip)
+    {
+        yScale = gravFlip;
+        if (gravFlip != 1f && rBody.linearVelocity.y != 0f)
+        {
+            transform.localScale = new Vector3(transform.localScale.x, yScale, 1);
+        }
+
+        rBody.gravityScale = gravFlip;
+    }
+
 }
