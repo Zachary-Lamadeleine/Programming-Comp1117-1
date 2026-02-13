@@ -43,4 +43,9 @@ public class PlayerInputHandler : MonoBehaviour
             
         }
     }
+
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+
+    }
 }
