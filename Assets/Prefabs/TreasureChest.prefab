@@ -149,5 +149,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gemPrefab: {fileID: 266187601570905156, guid: de465a5f61a24a447b8fdff6e2945e8f, type: 3}
   gemCount: 3
-  launchForce: 10
+  launchForce: 2
   openChestSprite: {fileID: 3888885927669863452, guid: 755cbee00acf4e340aa0f8eeb8003a87, type: 3}

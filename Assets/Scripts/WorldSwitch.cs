@@ -8,7 +8,7 @@ public class WorldSwitch : MonoBehaviour, IInteractable
     [SerializeField] private UnityEvent onActivated;
 
     private SpriteRenderer sRend;
-    private bool isFlipped = false;
+    public bool isFlipped = false;
 
     private void Awake()
     {
