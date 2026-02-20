@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 2460430801169391800}
   - component: {fileID: 5855978165564646882}
   - component: {fileID: 712758911439437712}
-  - component: {fileID: 7750313574411193860}
   - component: {fileID: 5442618418101957337}
+  - component: {fileID: 8084093997062529312}
   m_Layer: 0
   m_Name: SpeedBoost
   m_TagString: Untagged
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2066491405
-  m_SortingLayer: 1
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: bdce2a9cb3d0242958c2593a3b8d8742, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -136,22 +136,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.1753343, y: 1.0253493}
   m_EdgeRadius: 0
---- !u!114 &7750313574411193860
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2552723440867191054}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc8919af605bd974bbc91587797e7f49, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boostSpeed: 20
-  controller: {fileID: 0}
-  boostDuration: 2
-  targetPosition: {x: 0, y: 0}
 --- !u!95 &5442618418101957337
 Animator:
   serializedVersion: 7
@@ -174,3 +158,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8084093997062529312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2552723440867191054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4942f69788a1784fb100bab7fb585e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boostSpeed: 20
+  boostDuration: 5
+  targetPosition: {x: 0, y: 0}
