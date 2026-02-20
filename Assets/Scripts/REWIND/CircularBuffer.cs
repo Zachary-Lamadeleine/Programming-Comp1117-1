@@ -1,34 +1,28 @@
 using System.Collections.Generic;
 
-public class CircularBuffer
+public class CircularBuffer<T>
 {
     //Collection itself
-    private List<int> buffer;
+    private List<T> buffer;
     //Capacity Variable
     private int capacity;
 
     //Contructor - Allows me to create a circular buffer with a capacity
     public CircularBuffer(int size)
     {
-        buffer = new List<int>(size);
+        buffer = new List<T>(size);
         this.capacity = size;
     }
 
     //Public Property
     //Read-Only Count property
-    //public int Count
-    //{
-    //    get
-    //    {
-    //        return buffer.Count;
-    //    }
-    //}
+    
     public int Count => buffer.Count;
 
     //Buffer Operations
     //=================
     //1.Push -- Adding new info to buffer
-    public void Push(int item)
+    public void Push(T item)
     {
         //Check if my buffer is at or above capacity
         if(buffer.Count >= capacity)
@@ -38,17 +32,17 @@ public class CircularBuffer
         buffer.Add(item);  
     }
     //2.Pop -- Removing the next peice of info from the buffer
-    public int Pop()
+    public T Pop()
     {
         if (buffer.Count == 0)
         {
-            return -1; // -1 Will act as a special value to check against
+            return default(T); //Default returns the default value of the datatype T
         }
 
         int lastIndex = buffer.Count - 1;
 
-        int item = buffer[lastIndex]; //Creates a copy of the item in Buffer[LastIndex] and stores it in 'Item'
-        buffer.Remove(lastIndex);   //Removes item from last Index
+        T item = buffer[lastIndex]; //Creates a copy of the item in Buffer[LastIndex] and stores it in 'Item'
+        buffer.RemoveAt(lastIndex);   //Removes item from last Index
 
         return item;
     }

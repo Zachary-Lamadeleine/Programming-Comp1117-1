@@ -5,31 +5,34 @@ public class TimeRewinder : MonoBehaviour
 {
     [Header("Settings")]
     [SerializeField] private int maxFrames = 300;
-    public bool isRewinding = false; //Public is Optional visual reference to know when you are rewinding
+    public bool isRewinding = false;                // Optional visual reference to know when you are rewinding.
 
-    private CircularBuffer intBuffer;
+    private CircularBuffer<Vector3> positionHistory;
+    private CircularBuffer<Quaternion> rotationHistory;
+    private CircularBuffer<Vector3> scaleHistory;
 
     private void Awake()
     {
-        intBuffer = new CircularBuffer(maxFrames);
+        positionHistory = new CircularBuffer<Vector3>(maxFrames);
+        rotationHistory = new CircularBuffer<Quaternion>(maxFrames);
+        scaleHistory = new CircularBuffer<Vector3>(maxFrames);
     }
 
     public void OnRewind(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.performed)
         {
             isRewinding = true;
-            Debug.Log("RewindStarted");
-            
+            Debug.Log("Rewind started");
         }
-        else if(context.canceled)
+        else if (context.canceled)
         {
-            isRewinding= false;
-            Debug.Log("RewindStoped");
+            isRewinding = false;
+            Debug.Log("Rewind cancelled");
         }
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (!isRewinding)
         {
@@ -39,20 +42,30 @@ public class TimeRewinder : MonoBehaviour
         {
             Rewind();
         }
-            
     }
 
-    //Record - Records info every frame
+    // Record - Records information every frame
     private void Record()
     {
-        intBuffer.Push(Random.Range(0, 1000));
+        positionHistory.Push(transform.position);
+        rotationHistory.Push(transform.rotation);
+        scaleHistory.Push(transform.localScale);
     }
-
-    //Rewind - Retreives info every frame from the buffer
+    // Rewind - Retrieves information every frame from the buffer
     private void Rewind()
     {
-        int tempInt = intBuffer.Pop();
-        Debug.Log ("Popped Value; " + tempInt);
-    }
+        if (rotationHistory.Count > 0)
+        {
+            transform.position = positionHistory.Pop();
+            transform.rotation = rotationHistory.Pop();
 
+            Vector3 tempLocalScale = scaleHistory.Pop();
+            transform.localScale = new Vector3(tempLocalScale.x * -1, tempLocalScale.y, tempLocalScale.z);
+        }
+        else
+        {
+            Debug.Log("Rewind stopped due to lack of information");
+            isRewinding = false;
+        }
+    }
 }
