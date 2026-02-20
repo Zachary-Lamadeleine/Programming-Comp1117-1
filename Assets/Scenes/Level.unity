@@ -15687,7 +15687,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &387262258
 Transform:
   m_ObjectHideFlags: 0
@@ -16680,7 +16680,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawner: {fileID: 825644888}
   gemPrefab: {fileID: 3430609458008788122, guid: de465a5f61a24a447b8fdff6e2945e8f, type: 3}
-  cherryPrefab: {fileID: 8084093997062529312, guid: 1c08d909fb2782847a9d04aa3274587d, type: 3}
+  cherryPrefab: {fileID: 1022717474647400711, guid: 1c08d909fb2782847a9d04aa3274587d, type: 3}
 --- !u!4 &825644890
 Transform:
   m_ObjectHideFlags: 0

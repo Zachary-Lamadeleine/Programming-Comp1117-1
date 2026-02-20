@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5855978165564646882}
   - component: {fileID: 712758911439437712}
   - component: {fileID: 5442618418101957337}
-  - component: {fileID: 8084093997062529312}
+  - component: {fileID: 1022717474647400711}
   m_Layer: 0
   m_Name: SpeedBoost
   m_TagString: Untagged
@@ -158,7 +158,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8084093997062529312
+--- !u!114 &1022717474647400711
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -170,6 +170,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4942f69788a1784fb100bab7fb585e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boostSpeed: 20
+  boostSpeed: 10
   boostDuration: 5
   targetPosition: {x: 0, y: 0}
